@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <!--
+  todo-itemと呼ばれるコンポーネントを定義する方法
+  Vue.component('todo-item', {
+    template: '<li>todoです</li>'
+  })
+  こうすることで
+  <ol>
+    <todo-item></todo-item>
+  </ol>
+  とすると<li>todoです</li>が表示される
+  -->
+  <div id="app-7">
+    <ol>
+      <!-- これでliタグを表示 -->
+      <!--
+      itemの中身は
+      { id: 0, item_name: 'cheese' },
+      { id: 1, item_name: 'bread' },
+      { id: 2, item_name: 'meat' }
+
+      {{ hogehoge }}のようなマスタッシュ記法はHTMLタグの中では使えない
+      v-bind:属性名="hoge"でバインドする属性を指定する
+      v-bind:property_name="item"でgroceryListを見に行くようなイメージ
+       -->
+      <todo-item
+        v-for="item in groceryList"
+        v-bind:property_name="item"
+        v-bind:key="item.id"
+      ></todo-item>
+    </ol>
+  </div>
+
+  <script>
+  // todo-itemという名前のコンポーネントを定義する
+    Vue.component('todo-item', {
+      props: ['property_name'],
+      template: '<li>{{ property_name.item_name }}</li>'
+    })
+
+    var app7 = new Vue({
+      el: '#app-7',
+      data: {
+        groceryList: [
+          { id: 0, item_name: 'cheese' },
+          { id: 1, item_name: 'bread' },
+          { id: 2, item_name: 'meat' }
+        ]
+      }
+    })
+    // app4.todos.push({text: 'New Item'})でliに要素を追加できる。
+  </script>
+</body>
+</html>

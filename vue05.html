@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app-5">
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage" type="button" name="button">文字列を逆さにする</button>
+  </div>
+
+  <script>
+    var app5 = new Vue({
+      el: '#app-5',
+      data: {
+        message: 'masanari h0ri'
+      },
+      //このように自前でメソッドを定義して、v-on:clickでクリックした時を監視
+      //this.messageはapp5.message
+      methods: {
+        reverseMessage: function(){
+          this.message = this.message.split('').reverse().join('')
+        }
+      }
+    })
+    // app4.todos.push({text: 'New Item'})でliに要素を追加できる。
+  </script>
+</body>
+</html>

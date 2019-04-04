@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style media="screen">
+    .app-4__order_list {
+      color: #ff0000;
+    }
+  </style>
+</head>
+<body>
+  <div id="app-4">
+    <ol>
+      <li v-for="todo in todos" class="app-4__order_list">
+        {{ todo.text }}
+      </li>
+    </ol>
+  </div>
+  
+  <script>
+    var app4 = new Vue({
+      el: '#app-4',
+      data: {
+        todos: [
+          { text: 'Javascript' },
+          { text: 'CSS' },
+          { text: 'HTML' },
+          { text: 'Other Language' }
+        ]
+      }
+    })
+    // app4.todos.push({text: 'New Item'})でliに要素を追加できる。
+  </script>
+</body>
+</html>
