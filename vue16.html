@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style media="screen">
+    .active {
+      color: green;
+    }
+
+    .text-danger {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="components-demo">
+    <button-center></button-center>
+  </div>
+  <script>
+  //button-centerという名前でVueコンポーネントを作成
+    Vue.component('button-center', {
+      // コンポーネントのdataオプションは関数でなくてはならない
+      // functionがないと複数のコンポーネントが使われた時に全てに変更が適用されてしまう。
+      data: function(){
+        return {
+          count: 0
+        }
+      },
+      template: '<button v-on:click="count++">Click Me!!{{ count }} times.</button>'
+    })
+
+    new Vue({
+      el: '#components-demo'
+    })
+
+  </script>
+</body>
+</html>

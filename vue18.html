@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style media="screen">
+    .active {
+      color: green;
+    }
+
+    .text-danger {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="components-demo">
+    <blog-post
+      v-for="post in posts"
+      v-bind:key="post.id"
+      v-bind:title="post.title"
+    ></blog-post>
+  </div>
+  <script>
+    Vue.component('blog-post', {
+      // プロパティはコンポーネントに登録できるカスタム属性。（要は属性を作れる）
+      // 値（今回でいうhogehogeとか）がプロパティ属性に渡されると、そのコンポーネント（blog-post）インスタンスのプロパティになる。
+      // blog-postコンポーネントにタイトルを渡すには、props オプションを使用して、
+      // このコンポーネントが受け入れるプロパティのリストにそれを含めることができる。
+      props: ['title'],
+      template: '<h4>{{ title }}</h4>'
+    })
+
+    new Vue({
+      el: '#components-demo',
+      data: {
+        posts: [
+          { id: 0, title: 'hogehoge' },
+          { id: 1, title: 'fugafuga' },
+          { id: 2, title: 'hagehage' }
+        ]
+      }
+    })
+  </script>
+</body>
+</html>
