@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="example">
+    <p>origin message: "{{ message }}"</p>
+    <p>computed reversed message: "{{ reversedMessage }}"</p>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#example',
+      data: {
+        message: 'original message'
+      },
+      computed: {
+        //getter関数
+        reversedMessage: function() {
+          //thisはvmインスタンスを指す
+          return this.message.split('').reverse().join('')
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style media="screen">
+    .active {
+      color: green;
+    }
+
+    .text-danger {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div
+  class="static"
+  v-bind:class="classObject"
+  >クラスの切り替え サンプルのテキスト</div>
+
+  <script>
+    var vm = new Vue({
+      el: '.static',
+      data: {
+        isActive: true,
+        error: null
+      },
+      computed: {
+        classObject: function(){
+          return {
+            // activeはthis.isActiveがtrueでthis.errorがfalseの時にtrue
+            active: this.isActive && !this.error,
+            // text-dangerはthis.errorがtrueでerror.typeがfatalの時にtrue
+            'text-danger': this.error && this.error.type === 'fatal'
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

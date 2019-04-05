@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style media="screen">
+    .question_input_tag {
+      border: 1px solid #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div id="watch-example">
+    <p>
+      yesかnoかで答えられる質問をしましょう（英語）
+      <input v-model="question" class="question_input_tag">
+    </p>
+    <p>{{ answer }}</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+  <script>
+    var watchExampleVM = new Vue({
+      el: '#watch-example',
+      // 初期データの定義
+      data: {
+        question: '',
+        answer: 'I cannot give you an answer until you ask a question!'
+      },
+      watch: {
+        // この関数は質問が変わるたびに実行される qusetionが監視対象のデータ
+        question: function(newQuestion, oldQuestion){
+          this.answer = 'Waiting for you to stop typing...'
+          //debouncedGetAnswerはあとで定義
+          this.debouncedGetAnswer()
+        }
+      },
+      created: function(){
+        //_.debounceは第一引数に関数を持ってきて、第二引数にwaitする時間を入れる。lodashにあるメソッド
+        // ユーザーの入力が終わるのを完全に待ってからajaxリクエストをする
+        // _.throttle(func, [wait=0], [options])
+        this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
+      },
+      methods: {
+        getAnswer: function(){
+          if(this.question.indexOf('?') === -1) {
+            this.answer = '質問には?をつけてください'
+            return
+          }
+          this.answer = '考え中...'
+
+          // thisはwatchExampleVMという名前のVueインスタンスを指す
+          var vm = this
+          axios.get('https://yesno.wtf/api')
+            .then(function(res){
+              vm.answer = _.capitalize(res.data.answer)
+            })
+            .catch(function(err){
+              vm.answer = 'Error! Could not reach the API. ' + err
+            })
+        }
+      }
+    })
+  </script>
+</body>
+</html>
