@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>{{ items[0].name }}: {{ items[0].price }} × {{ items[0].quantity }}</p>
+    <p>{{ items[1].name }}: {{ items[1].price }} × {{ items[1].quantity }}</p>
+    <p>{{ items[2].name }}: {{ items[2].price }} × {{ items[2].quantity }}</p>
+    <p>小計: {{ totalPrice | numberWithDelimiter }}円</p>
+    <p>合計（税込）: {{ totalPriceWithinTax | numberWithDelimiter }}円</p>
+    <!-- 合計が1000円よりも小さい時に表示される -->
+    <p v-show="!canBuy">
+      {{ 1000 | numberWithDelimiter }}円以上から購入できます。
+    </p>
+  </div>
+  <script>
+    var items = [
+      {
+        name: '鉛筆',
+        price: 300,
+        quantity: 0
+      },
+      {
+        name: 'ノート',
+        price: 400,
+        quantity: 0
+      },
+      {
+        name: '消しゴム',
+        price: 500,
+        quantity: 0
+      }
+    ]
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        items: items
+      },
+      filters: {
+        numberWithDelimiter: function(value){
+          if(!value){
+            return '0'
+          }
+          return value.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+        }
+      },
+      computed: {
+        totalPrice: function() {
+          // thisでインスタンス内部のデータにアクセス
+          return this.items.reduce(function(sum, item){
+            return sum + (item.price * item.quantity)
+          }, 0)
+        },
+        totalPriceWithinTax: function(){
+          // 算出プロパティに依存した算出プロパティも定義できる
+          return Math.floor(this.totalPrice * 1.08)
+        },
+        canBuy: function(){
+          return this.totalPrice >= 1000
+        }
+      }
+    })
+  </script>
+</body>
+</html>

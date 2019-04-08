@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>合計額（税抜き）は{{ totalPrice }}円です </p>
+    <p>合計額（税込み）は{{ totalPriceWithinTax }}円です </p>
+  </div>
+  <script>
+    var items = [
+      {
+        name: '鉛筆',
+        price: 300,
+        quantity: 0
+      },
+      {
+        name: 'ノート',
+        price: 400,
+        quantity: 6
+      },
+      {
+        name: '消しゴム',
+        price: 500,
+        quantity: 0
+      }
+    ]
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        items: items
+      },
+      computed: {
+        totalPrice: function() {
+          // thisでインスタンス内部のデータにアクセス
+          return this.items.reduce(function(sum, item){
+            return sum + (item.price * item.quantity)
+          }, 0)
+        },
+        totalPriceWithinTax: function(){
+          // 算出プロパティに依存した算出プロパティも定義できる
+          return Math.floor(this.totalPrice * 1.08)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
