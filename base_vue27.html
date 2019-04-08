@@ -9,6 +9,13 @@
 </head>
 <body>
   <div id="app">
+    <ul>
+      <li v-for="item in items" v-bind:key="item.name">
+        <!-- v-onの代わりにv-modelを使う -->
+        {{ item.name }}の個数: <input type="number" v-model="item.quantity" min="0">
+      </li>
+    </ul>
+    <hr>
     <div v-bind:style="errorMessageStyle">
       <ul>
         <li v-for="item in items" v-bind:key="item.name">
@@ -16,13 +23,13 @@
         </li>
       </ul>
       <p>小計: {{ totalPrice | numberWithDelimiter }}円</p>
-      <p>合計（税込）: {{ totalPriceWithinTax | numberWithDelimiter }}円</p>
-      <!-- 合計が1000円よりも小さい時に表示される -->
+      <p>合計（税込）{{ totalPriceWithinTax | numberWithDelimiter }}</p>
       <p v-show="!canBuy">
-        {{ 1000 | numberWithDelimiter }}円以上から購入できます。
+        {{ 1000 | numberWithDelimiter }} 円以上から購入できます。
       </p>
     </div>
   </div>
+
   <script>
     var items = [
       {
@@ -47,8 +54,8 @@
         items: items
       },
       filters: {
-        numberWithDelimiter: function(value){
-          if(!value){
+        numberWithDelimiter: function(value) {
+          if(!value) {
             return '0'
           }
           return value.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,')
@@ -56,22 +63,20 @@
       },
       computed: {
         totalPrice: function() {
-          // thisでインスタンス内部のデータにアクセス
-          return this.items.reduce(function(sum, item){
+          return this.items.reduce(function(sum, item) {
             return sum + (item.price * item.quantity)
           }, 0)
         },
-        totalPriceWithinTax: function(){
-          // 算出プロパティに依存した算出プロパティも定義できる
+        totalPriceWithinTax: function() {
           return Math.floor(this.totalPrice * 1.08)
         },
-        canBuy: function(){
+        canBuy: function() {
           return this.totalPrice >= 1000
         },
-        errorMessageStyle: function(){
+        errorMessageStyle: function() {
           return {
-            border: this.canBuy ? '' : '1px solid red',
-            color: this.canBuy ? '' : 'red'
+            border: this.canBuy ? '' : '1px solid #ff0000',
+            color: this.canBuy ? '' : '#ff0000'
           }
         }
       }
