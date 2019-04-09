@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <!--
+  propsは親からテンプレートの属性をv-bindで渡す
+  子コンポーネントでpropsを指定して、テンプレート経由で渡すことで、親から子に渡すことができる。
+  -->
+
+  <div id="app">
+    <!-- バインドするデータはmyItem -->
+    <item-desc v-bind:item-name=myItem></item-desc>
+  </div>
+  <script>
+    Vue.component('item-desc', {
+      props: {
+        itemName: {
+          type: String
+        }
+      },
+      template: '<p>{{ itemName }}は便利です。</p>'
+    })
+    new Vue({
+      el: '#app',
+      data: {
+        myItem: 'pen'
+      }
+    })
+
+    // イメージとしては
+    // Vueインスタンスのなかにデータオブジェクトがあり
+    // item-descというHTMLタグ（のようなもの）をコンポーネントとして定義する
+    // item-descというタグで、item-name属性を作る（myItemという変数の中身がそこに入ってくる）
+    // itemNameというプロパティの型はStringとする
+    // propsによりitem-descのなかでmyItem='pen'が使えるようになり
+    // item-name='pen'という設定でテンプレートを展開する
+    // item-name = itemName = 'pen'
+    // templateの内容が<p>penは便利です。</p>となって表示される
+  </script>
+</body>
+</html>

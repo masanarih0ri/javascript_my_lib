@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="fruits-list">
+    <fruits-list-title></fruits-list-title>
+    <!--
+     テンプレートの命名規則について
+     ケバブケース: kebab-case
+     パスカルケース:PascalCase
+     ケバブケースの場合はHTMLテンプレートの中でそのままコンポーネントを使う
+     パスカルケースの場合はHTMLテンプレートの中で「ケバブケースでもパスカルケースでも」使うことができる。
+     <PascalCase></PascalCase>も <pascal-case></pascal-case>も使える。
+     WebComponentsのドラフトではケバブケースを推奨。
+    -->
+  </div>
+  <script>
+    new Vue({
+      el: '#fruits-list',
+      components: {
+        'fruits-list-title': {
+          template: '<h2>フルーツ一覧</h2>'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

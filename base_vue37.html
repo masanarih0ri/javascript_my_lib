@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="fruits-counter">
+    <div v-for="fruit in fruits">
+      <!-- カスタムイベントをv-onで補足する -->
+      <!-- incrementがカスタムイベントでincrementイベントをlistenしている -->
+      <!-- incrementCartStatusというメソッドが、counter-button（buttonタグ）を押した時に走る-->
+      {{ fruit.name }}: <counter-button v-on:increment="incrementCartStatus()"></counter-button>
+    </div>
+    <p>合計: {{ total }}</p>
+  </div>
+  <script>
+    // Vueのサブコンストラクタを生成する
+    // templateにbuttonタグ
+    // counterは0
+    // addToCartというメソッドをもつ
+    // addToCartの内容はcounterを+1することと、incrementカスタムイベントを発火させること
+    var counterButton = Vue.extend({
+      template: '<span>{{ counter }}個<button v-on:click="addToCart">追加</button></span>',
+      data: function() {
+        return {
+          counter: 0
+        }
+      },
+      methods: {
+        addToCart: function(){
+          this.counter += 1
+          this.$emit('increment') //incrementカスタムイベントの発火
+        }
+      }
+    })
+
+    // Vueインスタンスの作成
+    new Vue({
+      el: '#fruits-counter',
+      // Vueコンポーネントの定義
+      components: {
+        'counter-button': counterButton
+      },
+      data: {
+        // totalの初期値を設定
+        total: 0,
+        fruits: [
+          { name: '梨' },
+          { name: 'いちご' }
+        ]
+      },
+      // こちらは全体の個数をインクリメントするメソッド
+      methods: {
+        incrementCartStatus: function() {
+          this.total += 1
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="example">
+    <list-item></list-item>
+  </div>
+  <script>
+  // グローバルコンポーネントの定義
+  // Vue.component(tagName, options)
+    Vue.component('list-item', {
+      template: '<li>foo {{ contents }}</li>',
+      data: function() {
+        return { contents: 'bar' }
+      }
+    })
+
+    new Vue({
+      el: '#example'
+    })
+  </script>
+</body>
+</html>
