@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+  <div id="app">
+    <nav>
+      <!-- router-linkでナビゲーションを定義 -->
+      <router-link to="/top">TOPページ</router-link>
+      <router-link to="/users">ユーザー一覧ページ</router-link>
+    </nav>
+    <router-view></router-view>
+  </div>
+  <script type="text/x-template" id="user-list">
+    <div>ユーザー一覧ページです</div>
+  </script>
+
+  <script>
+  // これを定義することで、下でUserListをtemplateに設定することができるようになる。
+    var UserList = {
+      // HTML上のscriptタグのID指定することで、UserListがrouterの中で使えるようになる。
+      template: '#user-list'
+    }
+
+    var router = new VueRouter({
+      routes: [
+        {
+          path: '/top',
+          component: {
+            template: '<div>トップページです</div>'
+          }
+        },
+        {
+          path: '/users',
+          component: UserList
+        }
+      ]
+    })
+
+    var app = new Vue({
+      router: router
+    }).$mount('#app')
+  </script>
+</body>
+</html>
