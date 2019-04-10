@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style media="screen">
+    input {
+      border: 1px solid #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div id="login-example">
+    <user-login></user-login>
+  </div>
+  <!-- テンプレート部分 -->
+  <script type="text/x-template" id="login-template">
+    <div id="login-template">
+      <div>
+        <input type="text" placeholder="ログインID" v-model="user_id">
+      </div>
+      <div>
+        <input type="password" placeholder="パスワード" v-model="password">
+      </div>
+      <!-- loginメソッドは認証の処理 -->
+      <button v-on:click="login()">ログイン</button>
+    </div>
+  </script>
+  <script>
+    // コンポーネント
+    Vue.component('user-login', {
+      template: '#login-template', //これでscriptタグで囲った中身をtemplateとして使える
+      data: function() {
+        return {
+          user_id: '',
+          password: ''
+        }
+      },
+      methods: {
+        login: function() {
+          auth.login(this.user_id, this.password)
+        }
+      }
+    })
+    // ログイン周りのダミー
+    var auth = {
+      login: function(id, pass) {
+        window.alert("user_id: " + id + "\n" + "password" + pass);
+      }
+    }
+
+    new Vue({
+      el: '#login-example'
+    })
+  </script>
+</body>
+</html>
