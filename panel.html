@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Qiita検索アプリ</title>
+  <style>
+  body {
+    padding: 20px;
+    font: 16px/1.4 sans-serif;
+  }
+
+  button {
+    font-size: 1.25rem;
+    padding: 10px;
+    background: #0bd;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    outline: none;
+  }
+  button:hover {
+    background: #0090aa;
+  }
+
+  .panel {
+    background: #eee;
+    padding: 18px;
+    transform-origin: 0 0;
+  }
+
+  /* Animation */
+  .slide-enter-active, .slide-leave-active {
+    transition: .5s;
+  }
+  .slide-enter, .slide-leave-to {
+    transform: scaleY(0);
+  }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="show = !show">
+      {{ label }}
+    </button>
+    <transition name="slide">
+      <div v-if="show" class="panel">
+        <p>サンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキスト</p>
+      </div>
+    </transition>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script src="js/panel.js"></script>
+</body>
+</html>
