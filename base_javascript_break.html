@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  // numberが偶数の時にtrueを返す関数
+  function isEven(number) {
+    return number % 2 === 0;
+  }
+
+  // numbersに偶数が含まれているならtrueを返す関数
+  function isEvenIncluded(numbers) {
+    let isEvenIncluded = false;
+    // for文でnumbersの個数分繰り返す
+    for(let i = 0; i < numbers.length; i++) {
+      // numberを使って割り切れるかを確認する
+      const number = numbers[i];
+      if(isEven(number)) {
+        // 割り切れたらtrueとして処理を終える
+        isEvenIncluded = true;
+        break;
+      }
+    }
+    // isEvenIncludedを返す(true falseのいずれか)
+    return isEvenIncluded;
+  }
+
+  // arrayを設定
+  const array = [1, 5, 10, 25, 40];
+  // trueなのかfalseなのかを出す
+  console.log(isEvenIncluded(array));
+  </script>
+</body>
+</html>

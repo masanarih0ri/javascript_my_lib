@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  function isEven(number) {
+    return number % 2 === 0;
+  }
+
+  const numbers = [1, 5, 29, 41];
+  // isEvenが配列の各要素をテストするコールバック関数
+  console.log(numbers.some(isEven));
+  </script>
+</body>
+</html>

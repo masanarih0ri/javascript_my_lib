@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  // const result = array.reduce((前回の値, 現在の値) => {
+  //   return 次の値;
+  // }, 初期値)
+  function sum(number) {
+    // 渡ってきた配列をreduceで処理
+    return numbers.reduce((old_num, new_num) => {
+      // old_numとnew_numを加算したものを返す。初期値を指定している場合はold_numに0が入る
+      return old_num + new_num;
+    }, 0) //初期値は0
+  }
+
+  console.log(sum([1, 2, 3, 4, 5]));
+
+  </script>
+</body>
+</html>
