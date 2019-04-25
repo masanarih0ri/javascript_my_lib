@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>シンプルなお天気アプリ</title>
+</head>
+<body>
+  <h2>Weather Forecast</h2>
+  <div id="app" class="weather_box">
+    <div class="weather_info">
+      <p class="weather_city">{{ city }}</p>
+      <p class="weather_condition">{{ condition.main }} <span></p>
+      <p class="weather_temp">{{ temp | roundUp }}</p>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+  <script src="js/weather_app.js"></script>
+</body>
+</html>
