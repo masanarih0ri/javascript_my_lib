@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./js/jquery_min.js"></script>
+  <script src="./js/carousel_basic.js"></script>
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/carousel_basic.css">
+  <title>カルーセルのサンプルです</title>
+</head>
+<body>
+  <!-- カルーセルの表示領域を定義する -->
+  <div class="carousel">
+    <!-- カルーセルのコンテンツ全体を入れるもの -->
+    <div class="carousel__contents">
+      <!-- それぞれのitem -->
+      <div class="carousel__contents--item">
+        <img src="https://placehold.jp/500x200.png?text=1" alt="">
+      </div>
+      <div class="carousel__contents--item">
+        <img src="https://placehold.jp/500x200.png?text=2" alt="">
+      </div>
+      <div class="carousel__contents--item">
+        <img src="https://placehold.jp/500x200.png?text=3" alt="">
+      </div>
+      <div class="carousel__contents--item">
+        <img src="https://placehold.jp/500x200.png?text=4" alt="">
+      </div>
+      <div class="carousel__contents--item">
+        <img src="https://placehold.jp/500x200.png?text=5" alt="">
+      </div>
+    </div>
+    <button class="carousel__next_button">＞</button>
+    <button class="carousel__prev_button">＜</button>
+  </div>
+  <ul class="carousel__indicator"></ul>
+</body>
+</html>
