@@ -2,6 +2,8 @@ const CACHE_NAME = 'v1'
 
 const FILES_TO_CACHE = [
   '/serviceworker.html',
+  '/css/materialize.css'.
+  '/js/materialize.js'
 ];
 
 self.addEventListener('install', function(event) {
