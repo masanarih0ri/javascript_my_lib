@@ -1,0 +1,130 @@
+
+.carousel__wrapper {
+  margin: auto;
+  overflow: hidden;
+  width: 60vw;
+  height: auto;
+  position: relative;
+}
+
+@media (max-width:768px) {
+  .carousel__wrapper {
+    width: 75vw;
+  }
+}
+
+@media (max-width:480px) {
+  .carousel__wrapper {
+    width: 90vw;
+  }
+}
+
+.carousel__all_contents {
+  transition: .8s;
+}
+
+.carousel__item {
+  float: left;
+  width: 60vw;
+}
+
+@media (max-width:768px) {
+  .carousel__item {
+    width: 75vw;
+  }
+}
+
+@media (max-width:480px) {
+  .carousel__item {
+    width: 90vw;
+  }
+}
+
+.carousel__link_image {
+  display: block;
+  width: 60vw;
+}
+
+@media (max-width:768px) {
+  .carousel__link_image {
+    width: 75vw;
+  }
+}
+
+@media (max-width:480px) {
+  .carousel__link_image {
+    width: 90vw;
+  }
+}
+
+/* ボタン */
+.carousel__prev,
+.carousel__next {
+  background: #000;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  height: 48px;
+  line-height: 48px;
+  opacity: .7;
+  position: absolute;
+  text-align: center;
+  transition: .6s ease;
+  top: calc(50% - 24px);
+  user-select: none;
+  width: 48px;
+  overflow: visible;
+}
+
+@media (max-width:768px) {
+  .carousel__prev,
+  .carousel__next {
+    height: 36px;
+    line-height: 36px;
+    top: calc(50% - 18px);
+    width: 36px;
+  }
+}
+
+@media (max-width:480px) {
+  .carousel__prev,
+  .carousel__next {
+    height: 32px;
+    line-height: 32px;
+    top: calc(50% - 16px);
+    width: 32px;
+  }
+}
+
+.carousel__prev {
+  left: 1%;
+}
+
+.carousel__next {
+  right: 1%;
+}
+
+.carousel__link {
+  display: block;
+  width: 100%;
+}
+
+/* インジケーター */
+.carousel__indicator {
+  text-align: center;
+}
+
+.carousel__indicator_dot {
+  background: #bbb;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 4px;
+  height: 16px;
+  transition: .6s ease;
+  width: 16px;
+}
+
+.carousel__indicator_dot--active {
+  background: #717171;
+}
