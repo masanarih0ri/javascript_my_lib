@@ -19,14 +19,19 @@ self.addEventListener('install', (event) => {
 // App Shellファイルのいずれかが変更されるたびにservice workerがそのキャッシュを更新するようにする
 // これを機能させるには、CACHE_NAME変数を増やす必要がある
 self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if(key !== CACHE_NAME) {
-          console.log('[ServiceWorker] Removing old cache', key);
-          return caches.delete(key);
-        }
-      }));
-    })
-  );
+  // event.waitUntil(
+  //   caches.keys().then((keyList) => {
+  //     return Promise.all(keyList.map((key) => {
+  //       if(key !== CACHE_NAME) {
+  //         console.log('[ServiceWorker] Removing old cache', key);
+  //         return caches.delete(key);
+  //       }
+  //     }));
+  //   })
+  // );
+  console.log('activated!');
+});
+
+self.addEventListener('fetch', (event) => {
+  console.log(event.request.url);
 });
