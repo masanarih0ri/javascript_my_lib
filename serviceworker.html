@@ -2,7 +2,7 @@
 <html lang="ja">
 
 <head>
-  <title>Hello!</title>
+  <title>SSServiceWorker</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
 <body>
   <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Offline</a>
+      <a href="#" class="brand-logo">serviceWorker</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="#">sample</a></li>
         <li><a href="#">sample</a></li>
@@ -132,7 +132,7 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/javascript_my_lib/sw.js')
+        navigator.serviceWorker.register('/sw.js')
           .then((registration) => {
             console.log('register!', registration.scope);
           }, (error) => {
