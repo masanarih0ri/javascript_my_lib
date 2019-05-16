@@ -7,22 +7,18 @@ $(function(){
   // 動かすコンテンツ領域をcssで指定
   $('.carousel__all_contents').css('width', carouselAllContentsWidth);
 
-  // ブラウザをリサイズした時の処理
-  let timer = false;
-  let prewidth = $(window).width();
-  $(window).resize(function() {
-    if (timer !== false) {
-      clearTimeout(timer);
-    }
-    timer = setTimeout(function() {
-      let nowWidth = $(window).width();
-      if(prewidth !== nowWidth){
-        location.reload();
+  // ページにアクセスがきたらオートでスライドを動かす
+  function autoMoveCarouselItem() {
+    timeId = setInterval(function(){
+      carouselPositionCount++;
+      if(carouselPositionCount > carouselItemCount - 1) {
+        carouselPositionCount = 0;
       }
-      prewidth = nowWidth;
-    },300);
-  });
+      showCarouselItem();
+    }, 4000);
+  }
 
+  autoMoveCarouselItem();
 
   function showCarouselItem() {
     $('.carousel__all_contents').css('transform', 'translateX(' + -(carouselPositionCount * carouselItemWidth) + 'px)');
@@ -51,5 +47,21 @@ $(function(){
     carouselPositionCount = indexNumber;
     showCarouselItem();
   });
-});
 
+  // ブラウザをリサイズした時の処理
+  $(window).resize(function() {
+    let reloadContents = false;
+    let beforeWindowWidth = $(window).width();
+    if (reloadContents !== false) {
+      // 何度も処理を実行しないための対応
+      clearTimeout(reloadContents);
+    }
+    reloadContents = setTimeout(function() {
+      let afterWindowWidth = $(window).width();
+      if(beforeWindowWidth !== afterWindowWidth){
+        location.reload();
+      }
+      beforeWindowWidth = afterWindowWidth;
+    },300);
+  });
+});
