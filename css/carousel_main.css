@@ -1,10 +1,10 @@
 
 .carousel__wrapper {
-  margin: auto;
-  overflow: hidden;
-  width: 60vw;
   height: auto;
+  margin: 16px auto;
+  overflow: hidden;
   position: relative;
+  width: 60vw;
 }
 
 @media (max-width:768px) {

@@ -1,15 +1,23 @@
 $(function(){
-  let carouselItemWidth = $('.carousel__item').outerWidth();
-  let carouselItemCount = $('.carousel__item').length;
+  const $carouselItem = $('.carousel__item');
+  const $carouselAllContents = $('.carousel__all_contents');
+  const $carouselIndicatorDot = $('.carousel__indicator_dot');
+  let carouselItemWidth = $carouselItem.outerWidth();
+  let carouselItemCount = $carouselItem.length;
   let carouselAllContentsWidth = carouselItemCount * carouselItemWidth;
   let carouselPositionCount = 0;
+  let carouselTimer;
 
-  // 動かすコンテンツ領域をcssで指定
-  $('.carousel__all_contents').css('width', carouselAllContentsWidth);
+  // カルーセルのアイテムを横にスライドする関数
+  function showCarouselItem() {
+    $carouselAllContents.css('transform', 'translateX(-' + (carouselPositionCount * carouselItemWidth) + 'px)');
+    $carouselIndicatorDot.removeClass('carousel__indicator_dot--active');
+    $carouselIndicatorDot.eq(carouselPositionCount).addClass('carousel__indicator_dot--active');
+  }
 
-  // ページにアクセスがきたらオートでスライドを動かす
+  // ページロード時にカルーセルを自動で動かす関数
   function autoMoveCarouselItem() {
-    timeId = setInterval(function(){
+    carouselTimer = setInterval(function(){
       carouselPositionCount++;
       if(carouselPositionCount > carouselItemCount - 1) {
         carouselPositionCount = 0;
@@ -18,13 +26,10 @@ $(function(){
     }, 4000);
   }
 
-  autoMoveCarouselItem();
+  // カルーセルの全てのコンテンツ幅の合計を設定
+  $carouselAllContents.css('width', carouselAllContentsWidth);
 
-  function showCarouselItem() {
-    $('.carousel__all_contents').css('transform', 'translateX(' + -(carouselPositionCount * carouselItemWidth) + 'px)');
-    $('.carousel__indicator_dot').removeClass('carousel__indicator_dot--active');
-    $('.carousel__indicator_dot').eq(carouselPositionCount).addClass('carousel__indicator_dot--active');
-  }
+  autoMoveCarouselItem();
 
   $('.carousel__next').on('click', function(){
     carouselPositionCount++;
@@ -42,22 +47,30 @@ $(function(){
     showCarouselItem();
   });
 
-  $('.carousel__indicator_dot').on('click', function() {
-    let indexNumber = $('.carousel__indicator_dot').index(this);
+  $carouselIndicatorDot.on('click', function() {
+    let indexNumber = $carouselIndicatorDot.index(this);
     carouselPositionCount = indexNumber;
     showCarouselItem();
   });
 
-  // ブラウザをリサイズした時の処理
+  $carouselItem.on('mouseenter', function(){
+    clearInterval(carouselTimer);
+  });
+
+  $carouselItem.on('mouseleave', function(){
+    autoMoveCarouselItem();
+  });
+
+  // carouselAllContentsWidthをそのまま保持してしまうのでリロードする処理
   $(window).resize(function() {
-    let reloadContents = false;
+    let isReloadContents = false;
     let beforeWindowWidth = $(window).width();
-    if (reloadContents !== false) {
-      // 何度も処理を実行しないための対応
-      clearTimeout(reloadContents);
+    if (isReloadContents !== false) {
+      clearTimeout(isReloadContents);
     }
-    reloadContents = setTimeout(function() {
+    isReloadContents = setTimeout(function() {
       let afterWindowWidth = $(window).width();
+      carouselAllContentsWidth = carouselItemCount * carouselItemWidth;
       if(beforeWindowWidth !== afterWindowWidth){
         location.reload();
       }
