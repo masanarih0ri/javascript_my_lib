@@ -17,23 +17,22 @@ $(function(){
   }
 
   // ページロード時にカルーセルを自動で動かす関数
-
-  if(!userAgentOfBrowser.match('/(iPhone|iPad|iPod|Android)/i')) {
-    function autoMoveCarouselItem() {
-      carouselTimer = setInterval(function(){
-        carouselPositionCount++;
-        if(carouselPositionCount > carouselItemCount - 1) {
-          carouselPositionCount = 0;
-        }
-        showCarouselItem();
-      }, 4000);
-    }  
+  function autoMoveCarouselItem() {
+    carouselTimer = setInterval(function(){
+      carouselPositionCount++;
+      if(carouselPositionCount > carouselItemCount - 1) {
+        carouselPositionCount = 0;
+      }
+      showCarouselItem();
+    }, 4000);
   }
 
   // カルーセルの全てのコンテンツ幅の合計を設定
   $carouselAllContents.css('width', carouselAllContentsWidth);
 
-  autoMoveCarouselItem();
+  if(!userAgentOfBrowser.match('/(iPhone|iPad|iPod|Android)/i')) {
+    autoMoveCarouselItem();
+  }
 
   $('.carousel__next').on('click', function(){
     carouselPositionCount++;
@@ -62,7 +61,9 @@ $(function(){
   });
 
   $carouselItem.on('mouseleave', function(){
-    autoMoveCarouselItem();
+    if(!userAgentOfBrowser.match('/(iPhone|iPad|iPod|Android)/i')) {
+      autoMoveCarouselItem();
+    }
   });
 
   // carouselAllContentsWidthをそのまま保持してしまうのでリロードする処理
@@ -79,6 +80,6 @@ $(function(){
         location.reload();
       }
       beforeWindowWidth = afterWindowWidth;
-    },300);
+    }, 300);
   });
 });
