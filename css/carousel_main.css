@@ -42,22 +42,9 @@
 
 .carousel__link_image {
   display: block;
-  width: 60vw;
+  width: 100%;
 }
 
-@media (max-width:768px) {
-  .carousel__link_image {
-    width: 75vw;
-  }
-}
-
-@media (max-width:480px) {
-  .carousel__link_image {
-    width: 90vw;
-  }
-}
-
-/* ボタン */
 .carousel__prev,
 .carousel__next {
   background: #000;
@@ -112,6 +99,8 @@
 /* インジケーター */
 .carousel__indicator {
   text-align: center;
+  margin: 0 auto;
+  width: 60vw;
 }
 
 .carousel__indicator_dot {
