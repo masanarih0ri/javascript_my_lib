@@ -17,8 +17,9 @@ $(function(){
   }
 
   // ページロード時にカルーセルを自動で動かす関数
-  function autoMoveCarouselItem() {
-    if(!userAgentOfBrowser.match('/(iPhone|iPad|iPod|Android)/i')) {
+
+  if(!userAgentOfBrowser.match('/(iPhone|iPad|iPod|Android)/i')) {
+    function autoMoveCarouselItem() {
       carouselTimer = setInterval(function(){
         carouselPositionCount++;
         if(carouselPositionCount > carouselItemCount - 1) {
@@ -26,7 +27,7 @@ $(function(){
         }
         showCarouselItem();
       }, 4000);
-    }
+    }  
   }
 
   // カルーセルの全てのコンテンツ幅の合計を設定
