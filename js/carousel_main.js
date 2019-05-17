@@ -2,6 +2,7 @@ $(function(){
   const $carouselItem = $('.carousel__item');
   const $carouselAllContents = $('.carousel__all_contents');
   const $carouselIndicatorDot = $('.carousel__indicator_dot');
+  const userAgentOfBrowser = navigator.userAgent;
   let carouselItemWidth = $carouselItem.outerWidth();
   let carouselItemCount = $carouselItem.length;
   let carouselAllContentsWidth = carouselItemCount * carouselItemWidth;
@@ -17,13 +18,15 @@ $(function(){
 
   // ページロード時にカルーセルを自動で動かす関数
   function autoMoveCarouselItem() {
-    carouselTimer = setInterval(function(){
-      carouselPositionCount++;
-      if(carouselPositionCount > carouselItemCount - 1) {
-        carouselPositionCount = 0;
-      }
-      showCarouselItem();
-    }, 4000);
+    if(!userAgentOfBrowser.match('/(iPhone|iPad|iPod|Android)/i')) {
+      carouselTimer = setInterval(function(){
+        carouselPositionCount++;
+        if(carouselPositionCount > carouselItemCount - 1) {
+          carouselPositionCount = 0;
+        }
+        showCarouselItem();
+      }, 4000);
+    }
   }
 
   // カルーセルの全てのコンテンツ幅の合計を設定
