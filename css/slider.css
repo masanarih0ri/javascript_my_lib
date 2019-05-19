@@ -1,0 +1,97 @@
+/* メインエリア */
+.slider {
+  margin: 0 auto;
+  position: relative;
+  text-align: left;
+  width: 800px;
+  /* ページロードの時にスライダー全体をフェードインさせるために必要 */
+  visibility: hidden;
+}
+/* スライドする要素 */
+.slider__unorder_list,
+.slider__item {
+  display: inline;
+  float: left;
+  overflow: hidden;
+}
+/* 表示する画像のサイズ調整 */
+.slider__image {
+  width: 100%;
+}
+
+/* スライダー全体を囲んでいる部分 */
+
+.slider__cover {
+  margin-bottom: 30px;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* 画像リスト全体を囲んでいるブロック要素のスタイル */
+.slider__wrap {
+  left: 0;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
+
+/* ナビゲーションのスタイル */
+
+.slider__navigation {
+  bottom: 15px;
+  height: 10px;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  visibility: visible;
+  z-index: 110;
+}
+
+.slider__navigation_link {
+  background: #aaa;
+  display: inline-block;
+  margin: 0 5px;
+  height: 10px;
+  overflow: hidden;
+  transition: all .2s;
+  width: 40px;
+}
+
+.slider__navigation_link:hover {
+  opacity: .6;
+}
+
+.slider__navigation_link--active {
+  background: #000;
+}
+
+.slider__navigation_link--active:hover {
+  opacity: 1;
+}
+
+/* ナビゲーションボタン */
+.slider__navigation_prev,
+.slider__navigation_next {
+  top: 0;
+  position: absolute;
+  z-index: 105;
+}
+
+.slider__navigation_prev:hover,
+.slider__navigation_next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: all .3s;
+}
+
+.slider__navigation_prev {
+  background: url(..images/btnPrev.png) no-repeat center right;
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 0;
+}
+
+.slider__navigation_next {
+  background: url(..images/btnNext.png) no-repeat center left;
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 0;
+}
