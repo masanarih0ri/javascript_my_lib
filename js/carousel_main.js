@@ -82,16 +82,48 @@ $(function(){
   // スワイプの処理
   // どこの要素についてやるか？carousel__all_contentsでまずはやる
   // 指をタッチした時
-  $carouselAllContents.on('touchstart', function(){
-    $('.position').text('touch');
-  })
+  let position;
+  let direction;
+  function onTouchStart(event) {
+    position = getPosition(event);
+    direction = '';
+
+    console.log(position);
+    console.log(direction);
+
+  }
   // 指を動かした時
-  $carouselAllContents.on('touchmove', function(){
-    $('.position').text('move');
-  })
+  function onTouchMove(event) {
+    // スタートしたボジションと動いた先の座標の差を取得し、X座標が左側に行っていればその処理をする
+    if (position - getPosition(event) > 70) {
+      direction = 'left'; //左と検知
+    } else if (position - getPosition(event) > -70) {
+      direction = 'right'; //右と検知
+    }
+  }
 
   // 指を離した時
-  $carouselAllContents.on('touchend', function(){
-    $('.position').text('end');
-  })
+  function onTouchEnd() {
+    if (direction === 'left') {
+      carouselPositionCount++;
+      if(carouselPositionCount > carouselItemCount - 1) {
+        carouselPositionCount = 0
+      }
+      showCarouselItem();
+    } else if (direction === 'right') {
+      carouselPositionCount--;
+      if(carouselPositionCount < 0) {
+        carouselPositionCount = carouselItemCount - 1
+      }
+      showCarouselItem();
+    }
+  }
+
+  function getPosition(event) {
+    return event.originalEvent.touches[0].pageX;
+  }
+
+  $carouselAllContents.on('touchstart', onTouchStart); //指が触れたか検知
+  $carouselAllContents.on('touchmove', onTouchMove); //指が動いたか検知
+  $carouselAllContents.on('touchend', onTouchEnd); //指が離れたか検知
 });
