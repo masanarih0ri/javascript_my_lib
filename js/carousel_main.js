@@ -78,4 +78,20 @@ $(function(){
       beforeWindowWidth = afterWindowWidth;
     }, 300);
   });
+
+  // スワイプの処理
+  // どこの要素についてやるか？carousel__all_contentsでまずはやる
+  // 指をタッチした時
+  $carouselAllContents.on('touchstart', function(){
+    $('.carousel__section').text('touch');
+  })
+  // 指を動かした時
+  $carouselAllContents.on('touchmove', function(){
+    $('.carousel__section').text('move');
+  })
+
+  // 指を離した時
+  $carouselAllContents.on('touchend', function(){
+    $('.carousel__section').text('end');
+  })
 });
