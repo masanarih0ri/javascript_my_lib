@@ -2,7 +2,7 @@
 <html lang="ja">
 
 <head>
-  <title>SSServiceWorker</title>
+  <title>ServiceWorker</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
 <body>
   <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">serviceWorker</a>
+      <a href="#" class="brand-logo">Service Worker</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="#">sample</a></li>
         <li><a href="#">sample</a></li>
@@ -130,15 +130,19 @@
     </div>
   </footer>
   <script>
+  // serviceWorkerが使えるかどうかを確認
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
+        // serviceWorkerを登録する
         navigator.serviceWorker.register('/sw.js')
           .then((registration) => {
+            // registrationは仮引数
             console.log('register!', registration.scope);
-          }, (error) => {
-            console.log('failed', error)
           })
-      })
+          .catch((error) => {
+            console.log('failed', error);
+          });
+      });
     }
   </script>
 </body>
